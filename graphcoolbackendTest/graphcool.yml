@@ -1,0 +1,17 @@
+types: ./types.graphql
+
+permissions:
+- operation: "*"
+
+  #rootTokens:
+  #- mytoken
+
+functions:
+  hello:
+    handler:
+      code: src/hello.js
+    type: resolver
+    schema: src/hello.graphql
+
+
+

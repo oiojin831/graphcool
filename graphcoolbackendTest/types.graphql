@@ -1,0 +1,44 @@
+type User @model {
+  id: ID! @isUnique
+  name: String!
+  email: String!
+  userType: UserType!
+  admin: Admin @relation(name: "AdminUsers")
+  partner: Partner @relation(name: "PartnerUsers")
+  customer: Customer @relation(name: "CustomerUsers")
+}
+
+type Admin @model {
+  id: ID! @isUnique
+  users: [User!]! @relation(name: "AdminUsers")
+}
+
+type Partner @model {
+  id: ID! @isUnique
+  slug: String
+  name: String!
+  timeZone: String!
+  users: [User!]! @relation(name: "PartnerUsers")
+  activities: [Activity!]! @relation(name: "PartnerActivities")
+}
+
+type Customer @model {
+  id: ID! @isUnique
+  slug: String
+  name: String!
+  timeZone: String!
+  users: [User!]! @relation(name: "CustomerUsers")
+}
+
+type Activity @model {
+  id: ID! @isUnique
+  slug: String
+  name: String!
+  partner: Partner! @relation(name: "PartnerActivities")
+}
+
+enum UserType {
+  Admin
+  Partner
+  Customer
+}
